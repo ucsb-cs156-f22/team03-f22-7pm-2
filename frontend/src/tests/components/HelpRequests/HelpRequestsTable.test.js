@@ -1,4 +1,4 @@
-import {  render } from "@testing-library/react";
+import {  fireEvent, render, waitFor } from "@testing-library/react";
 import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
 import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -98,29 +98,29 @@ describe("HelpRequestsTable tests", () => {
 
   });
 
-  // test("Edit button navigates to the edit page for admin user", async () => {
+  test("Edit button navigates to the edit page for admin user", async () => {
 
-  //   const currentUser = currentUserFixtures.adminUser;
+    const currentUser = currentUserFixtures.adminUser;
 
-  //   const { getByTestId } = render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <MemoryRouter>
-  //         <UCSBDatesTable diningCommons={ucsbDatesFixtures.threeDates} currentUser={currentUser} />
-  //       </MemoryRouter>
-  //     </QueryClientProvider>
+    const { getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeRequests} currentUser={currentUser} />
+        </MemoryRouter>
+      </QueryClientProvider>
 
-  //   );
+    );
 
-  //   await waitFor(() => { expect(getByTestId(`UCSBDatesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+    await waitFor(() => { expect(getByTestId(`HelpRequestsTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
 
-  //   const editButton = getByTestId(`UCSBDatesTable-cell-row-0-col-Edit-button`);
-  //   expect(editButton).toBeInTheDocument();
+    const editButton = getByTestId(`HelpRequestsTable-cell-row-0-col-Edit-button`);
+    expect(editButton).toBeInTheDocument();
     
-  //   fireEvent.click(editButton);
+    fireEvent.click(editButton);
 
-  //   await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsbdates/edit/1'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/helpRequests/edit/1'));
 
-  // });
+  });
 
 
 });
