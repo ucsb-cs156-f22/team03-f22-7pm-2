@@ -1,4 +1,4 @@
-import {  fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
 import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -118,10 +118,9 @@ describe("HelpRequestsTable tests", () => {
     
     fireEvent.click(editButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/helpRequests/edit/1'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/helpRequest/edit/1'));
 
   });
-
 
 });
 

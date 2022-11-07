@@ -1,32 +1,23 @@
 import OurTable, { ButtonColumn} from "main/components/OurTable";
-// import { useBackendMutation } from "main/utils/useBackend";
-// import {  onDeleteSuccess } from "main/utils/UCSBDateUtils"
+import { useBackendMutation } from "main/utils/useBackend";
+import { onDeleteSuccess } from "main/utils/HelpRequestsUtils"
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
-
-// export function cellToAxiosParamsDelete(cell) {
-//     return {
-//         url: "/api/ucsbdiningcommons",
-//         method: "DELETE",
-//         params: {
-//             code: cell.row.values.code
-//         }
-//     }
-// }
+import { cellToAxiosParamsDelete } from "main/utils/HelpRequestsUtils";
 
 export default function HelpRequestsTable({ helpRequests, currentUser }) {
 
     const navigate = useNavigate();
 
     const editCallback = (cell) => {
-        navigate(`/helpRequests/edit/${cell.row.values.id}`)
+        navigate(`/helpRequest/edit/${cell.row.values.id}`)
     }
 
     // Stryker disable all : hard to test for query caching
     // const deleteMutation = useBackendMutation(
-    //     // cellToAxiosParamsDelete,
-    //     // { onSuccess: onDeleteSuccess },
-    //     ["/api/helpRequests/all"]
+    //     cellToAxiosParamsDelete,
+    //     { onSuccess: onDeleteSuccess },
+    //     ["/api/helpRequest/all"]
     // );
     // Stryker enable all 
 
