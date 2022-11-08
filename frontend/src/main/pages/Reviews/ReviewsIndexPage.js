@@ -6,7 +6,7 @@ export default function ReviewsIndexPage() {
       <div className="pt-2">
         <h1>Reviews</h1>
         <p>
-          This is where the index page will go 
+          This is where the index page will go
         </p>
       </div>
     </BasicLayout>
