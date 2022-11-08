@@ -19,7 +19,7 @@ describe("ReviewsIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <TodosIndexPage />
+                    <ReviewsIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
