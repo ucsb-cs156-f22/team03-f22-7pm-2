@@ -76,6 +76,5 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-
     });
 });
