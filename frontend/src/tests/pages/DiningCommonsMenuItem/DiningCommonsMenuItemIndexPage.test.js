@@ -47,20 +47,20 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     };
 
-    // test("renders without crashing for regular user", () => {
-    //     setupUserOnly();
-    //     const queryClient = new QueryClient();
-    //     // axiosMock.onGet("/api/DiningCommonsMenuItem/all").reply(200, []);
+    test("renders without crashing for regular user", () => {
+        setupUserOnly();
+        const queryClient = new QueryClient();
+        // axiosMock.onGet("/api/DiningCommonsMenuItem/all").reply(200, []);
 
-    //     render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <DiningCommonsMenuItemIndexPage />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
+        render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <DiningCommonsMenuItemIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
 
-    // });
+    });
 
     test("renders without crashing for admin user", () => {
         setupAdminUser();
