@@ -65,7 +65,7 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        // axiosMock.onGet("/api/DiningCommonsMenuItem/all").reply(200, []);
+        // axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -76,4 +76,36 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
         );
 
     });
+
+    // test("test what happens when you click delete, admin", async () => {
+    //     setupAdminUser();
+
+    //     const queryClient = new QueryClient();
+    //     axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, diningCommonsFixtures.threeCommons);
+    //     axiosMock.onDelete("/api/ucsbdiningcommonsmenuitem", {params: {id: 1}}).reply(200, "DiningCommonsMenuItem with id 1 was deleted");
+
+
+    //     const { getByTestId } = render(
+    //         <QueryClientProvider client={queryClient}>
+    //             <MemoryRouter>
+    //                 <DiningCommonsMenuItemIndexPage />
+    //             </MemoryRouter>
+    //         </QueryClientProvider>
+    //     );
+
+    //     await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toBeInTheDocument(); });
+
+    //    expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("1"); 
+
+
+    //     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    //     expect(deleteButton).toBeInTheDocument();
+       
+    //     fireEvent.click(deleteButton);
+
+    //     await waitFor(() => { expect(mockToast).toBeCalledWith("DiningCommonsMenuItem with id 1 was deleted") });
+
+    // });
+
+
 });
