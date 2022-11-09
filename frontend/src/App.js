@@ -23,6 +23,7 @@ import ArticleEditPage from "main/pages/Article/ArticleEditPage";
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
+import HelpRequestsIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage";
 
 
 function App() {
@@ -58,6 +59,13 @@ function App() {
             <>
               <Route exact path="/diningCommons/create" element={<DiningCommonsCreatePage />} />
               <Route exact path="/diningCommons/edit/:code" element={<DiningCommonsEditPage />} />
+            </>
+          )
+        }
+                {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/helpRequests/list" element={<HelpRequestsIndexPage />} />
             </>
           )
         }
