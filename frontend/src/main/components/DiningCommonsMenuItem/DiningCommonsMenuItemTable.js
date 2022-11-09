@@ -29,7 +29,7 @@ export default function DiningCommonsMenuItemTable({ diningCommonsMenuItem, curr
             accessor: 'id', // accessor is the "key" in the data
         },
         {
-            Header: 'Dining Commons Code',
+            Header: 'Dining Common Code',
             accessor: 'diningCommonsCode',
         },
         {
