@@ -11,7 +11,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { diningCommonsMenuItemFixtures } from "fixtures/diningCommonsMenuItemFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-import _mockConsole from "jest-mock-console";
+import mockConsole from "jest-mock-console";
 
 
 const mockToast = jest.fn();
@@ -87,6 +87,7 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, diningCommonsMenuItemFixtures.threediningCommonsMenuItems);
         axiosMock.onDelete("/api/ucsbdiningcommonsmenuitem", {params: {id: 1}}).reply(200, "DiningCommonsMenuItem with id 1 was deleted");
+        // axiosMock.onDelete("/api/ucsbdiningcommonsmenuitem").reply(200, "DiningCommonsMenuItem with id 1 was deleted");
 
 
         const { getByTestId } = render(
@@ -110,6 +111,51 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
         await waitFor(() => { expect(mockToast).toBeCalledWith("DiningCommonsMenuItem with id 1 was deleted") });
 
     });
-
+    test("renders three dates without crashing for regular user", async () => {
+        setupUserOnly();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, diningCommonsMenuItemFixtures.threediningCommonsMenuItems);
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <DiningCommonsMenuItemIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); });
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
+    });
+    test("renders three dates without crashing for admin user", async () => {
+        setupAdminUser();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, diningCommonsMenuItemFixtures.threediningCommonsMenuItems);
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <DiningCommonsMenuItemIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); });
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
+    });
+    test("renders empty table when backend unavailable, user only", async () => {
+        setupUserOnly();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/ucsbdates/all").timeout();
+        const restoreConsole = mockConsole();
+        const { queryByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <DiningCommonsMenuItemIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1); });
+        restoreConsole();
+        expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
+    });
 
 });

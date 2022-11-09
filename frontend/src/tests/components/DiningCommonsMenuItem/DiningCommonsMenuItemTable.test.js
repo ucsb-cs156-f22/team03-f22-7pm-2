@@ -6,6 +6,17 @@ import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 
 
+// export function cellToAxiosParamsDelete(cell) {
+//   return {
+//       url: "/api/ucsbdiningcommonsmenuitem",
+//       method: "DELETE",
+//       params: {
+//           id: cell.row.values.id
+//       }
+//   }
+// }
+
+
 const mockedNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
@@ -54,6 +65,23 @@ describe("DiningCommonsMenuItemTable tests", () => {
 
     );
   });
+
+
+    // test("Delete returns the correct params", () => {
+    //     // arrange
+    //     const cell = { row: { values: { id: 17 } } };
+
+    //     // act
+    //     const result = cellToAxiosParamsDelete(cell);
+
+    //     // assert
+    //     expect(result).toEqual({
+    //         url: "/api/ucsbdiningcommonsmenuitem",
+    //         method: "DELETE",
+    //         params: { id: 17 }
+    //     });
+    // });
+
 
   test("Has the expected column headers and content for adminUser", () => {
 
