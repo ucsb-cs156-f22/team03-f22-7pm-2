@@ -24,7 +24,7 @@ export default function DiningCommonsMenuItemIndexPage() {
 
   const currentUser = useCurrentUser();
 
-  const { data: dates, error: _error, status: _status } =
+  const { data: diningCommonsMenuItem, error: _error, status: _status } =
     useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
       ["/api/diningcommonsmenuitem/all"],
@@ -36,8 +36,8 @@ export default function DiningCommonsMenuItemIndexPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>UCSBDates</h1>
-        <DiningCommonsMenuItemTable dates={dates} currentUser={currentUser} />
+        <h1>DiningCommonsMenuItem</h1>
+        <DiningCommonsMenuItemTable diningCommonsMenuItem={diningCommonsMenuItem} currentUser={currentUser} />
       </div>
     </BasicLayout>
   )
