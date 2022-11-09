@@ -189,6 +189,30 @@ describe("AppNavbar tests", () => {
 
     });
 
+    test("renders the helprequests menu correctly for an admin", async () => {
+
+        const currentUser = currentUserFixtures.adminUser;
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByTestId("appnavbar-help-requests-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-help-requests-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId(/appnavbar-help-requests-create/)).toBeInTheDocument() );
+
+    });
+
     test("renders the ucsbdates menu correctly for an admin", async () => {
 
         const currentUser = currentUserFixtures.adminUser;
