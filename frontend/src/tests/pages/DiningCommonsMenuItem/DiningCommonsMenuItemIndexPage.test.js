@@ -24,12 +24,12 @@ jest.mock('react-toastify', () => {
     };
 });
 
-const mockedNavigate = jest.fn();
+// const mockedNavigate = jest.fn();
 
-jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useNavigate: () => mockedNavigate
-}));
+// jest.mock('react-router-dom', () => ({
+//     ...jest.requireActual('react-router-dom'),
+//     useNavigate: () => mockedNavigate
+// }));
 
 describe("DiningCommonsMenuItemIndexPage tests", () => {
 
@@ -54,7 +54,7 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        // axiosMock.onGet("/api/DiningCommonsMenuItem/all").reply(200, []);
+        axiosMock.onGet("/api/DiningCommonsMenuItem/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -69,7 +69,7 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        // axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
+        axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
