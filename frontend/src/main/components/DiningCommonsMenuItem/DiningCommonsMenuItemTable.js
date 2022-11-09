@@ -2,9 +2,9 @@ import OurTable from "main/components/OurTable";
 // import { useBackendMutation } from "main/utils/useBackend";
 // import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBDateUtils"
 // import { useNavigate } from "react-router-dom";
-import { hasRole } from "main/utils/currentUser";
+import { _hasRole } from "main/utils/currentUser";
 
-export default function DiningCommonsMenuItemTable({ diningCommonsMenuItem, currentUser }) {
+export default function DiningCommonsMenuItemTable({ diningCommonsMenuItem, _currentUser }) {
 
     // const navigate = useNavigate();
 
