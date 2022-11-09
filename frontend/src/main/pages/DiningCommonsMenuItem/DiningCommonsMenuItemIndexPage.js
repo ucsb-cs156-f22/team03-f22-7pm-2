@@ -32,7 +32,6 @@ export default function DiningCommonsMenuItemIndexPage() {
             { method: "GET", url: "/api/ucsbdiningcommonsmenuitem/all" },
       []
     );
-
   return (
     <BasicLayout>
       <div className="pt-2">
