@@ -50,7 +50,7 @@ function App() {
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
-              <Route exact path="/diningCommonsMenuItem/list" element={<DiningCommonsMenuItemIndexPage />} />
+              <Route exact path="/DiningCommonsMenuItem/list" element={<DiningCommonsMenuItemIndexPage />} />
             </>
           )
         }       
