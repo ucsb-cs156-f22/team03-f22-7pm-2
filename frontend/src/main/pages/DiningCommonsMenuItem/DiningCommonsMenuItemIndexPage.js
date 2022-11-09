@@ -36,7 +36,7 @@ export default function DiningCommonsMenuItemIndexPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>DiningCommonsMenuItem</h1>
+        <h1>Dining Commons Menu Item</h1>
         <DiningCommonsMenuItemTable diningCommonsMenuItem={diningCommonsMenuItem} currentUser={currentUser} />
       </div>
     </BasicLayout>
