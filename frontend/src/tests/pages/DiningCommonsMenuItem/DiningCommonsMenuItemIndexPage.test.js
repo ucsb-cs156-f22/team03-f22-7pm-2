@@ -60,7 +60,6 @@ describe("DiningCommonsMenuItemIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-
     });
 
     test("renders without crashing for admin user", () => {
