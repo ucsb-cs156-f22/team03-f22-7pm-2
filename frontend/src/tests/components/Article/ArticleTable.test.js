@@ -1,6 +1,7 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { articleFixtures } from "fixtures/articleFixtures";
 import ArticleTable from "main/components/Article/ArticleTable"
+import { cellToAxiosParamsDelete } from "main/components/Article/ArticleTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -16,6 +17,20 @@ jest.mock('react-router-dom', () => ({
 describe("ArticleTable tests", () => {
   const queryClient = new QueryClient();
 
+  test("Delete returns the correct params", () => {
+    // arrange
+    const cell = { row: { values: { id: 17 } } };
+
+    // act
+    const result = cellToAxiosParamsDelete(cell);
+
+    // assert
+    expect(result).toEqual({
+        url: "/api/article",
+        method: "DELETE",
+        params: { id: 17 }
+    });
+  });
 
   test("renders without crashing for empty table with user not logged in", () => {
     const currentUser = null;
