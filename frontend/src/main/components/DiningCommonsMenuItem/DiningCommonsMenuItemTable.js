@@ -16,7 +16,7 @@ export default function DiningCommonsMenuItemTable({ diningCommonsMenuItem, curr
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/ucsbdiningcommonsmenuitem/all"]
+        ["/api/diningcommonsmenuitem/all"]
     );
     // Stryker enable all 
 
