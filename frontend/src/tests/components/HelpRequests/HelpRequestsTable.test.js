@@ -4,7 +4,8 @@ import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
-
+import axios from "axios";
+import AxiosMockAdapter from "axios-mock-adapter";
 
 const mockedNavigate = jest.fn();
 
@@ -13,8 +14,20 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
+const mockToast = jest.fn();
+
+jest.mock('react-toastify', () => {
+    const originalModule = jest.requireActual('react-toastify');
+    return {
+        __esModule: true,
+        ...originalModule,
+        toast: (x) => mockToast(x)
+    };
+});
+
 describe("HelpRequestsTable tests", () => {
   const queryClient = new QueryClient();
+  const axiosMock = new AxiosMockAdapter(axios);
 
 
   test("renders without crashing for empty table with user not logged in", () => {
@@ -121,6 +134,32 @@ describe("HelpRequestsTable tests", () => {
   //   await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/helpRequest/edit/1'));
 
   // });
+
+  test("Delete button properly calls callback", async () => {
+
+    const currentUser = currentUserFixtures.adminUser;
+
+    axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestsFixtures.threeRequests);
+    axiosMock.onDelete("/api/helprequest").reply(200, "HelpRequest with id 1 was deleted");
+
+    const { getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeRequests} currentUser={currentUser} />
+        </MemoryRouter>
+      </QueryClientProvider>
+
+    );
+
+    await waitFor(() => { expect(getByTestId(`HelpRequestsTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+
+    const deleteButton = getByTestId(`HelpRequestsTable-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    
+    fireEvent.click(deleteButton);
+
+    await waitFor(() => { expect(mockToast).toBeCalledWith("HelpRequest with id 1 was deleted") });
+  });
 
 });
 
