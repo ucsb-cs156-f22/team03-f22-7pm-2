@@ -1,6 +1,6 @@
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBDateUtils"
+import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBOrganizationsUtils"
 // import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
@@ -16,7 +16,7 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/ucsbdates/all"]
+        ["/api/UCSBOrganization/all"]
     );
     // Stryker enable all 
 
@@ -45,10 +45,12 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
         }
     ];
 
+    const testid = "UCSBOrganizationsTable";
+
     const columnsIfAdmin = [
         ...columns,
         // ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable")
-        ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationsTable")
+        ButtonColumn("Delete", "danger", deleteCallback, testid)
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
@@ -57,6 +59,6 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
     return <OurTable
         data={organizations}
         columns={columnsToDisplay}
-        testid={"UCSBOrganizationsTable"}
+        testid={testid}
     />;
 };
