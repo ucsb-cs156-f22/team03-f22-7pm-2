@@ -7,10 +7,10 @@ import TodosIndexPage from "main/pages/Todos/TodosIndexPage";
 import TodosCreatePage from "main/pages/Todos/TodosCreatePage";
 import TodosEditPage from "main/pages/Todos/TodosEditPage";
 
+import RecommendationsIndexPage from "main/pages/Recommendations/RecommendationsIndexPage";
 import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexPage";
 import DiningCommonsCreatePage from "main/pages/DiningCommons/DiningCommonsCreatePage";
 import DiningCommonsEditPage from "main/pages/DiningCommons/DiningCommonsEditPage";
-
 
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
@@ -40,6 +40,13 @@ function App() {
               <Route exact path="/todos/list" element={<TodosIndexPage />} />
               <Route exact path="/todos/create" element={<TodosCreatePage />} />
               <Route exact path="/todos/edit/:todoId" element={<TodosEditPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/recommendations/list" element={<RecommendationsIndexPage />} />
             </>
           )
         }
