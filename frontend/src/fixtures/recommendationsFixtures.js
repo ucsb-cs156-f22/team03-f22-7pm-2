@@ -32,7 +32,7 @@ const recommendationsFixtures = {
             "dateRequested": "2022-11-15T00:00:00",
             "done": true,
             "explanation": "PhD CE Cal Tech",
-            "id": 4,
+            "id":4,
             "professorEmail": "phtcon@ucsb.edu",
             "requesterEmail": "alu@ucsb.edu"
         }

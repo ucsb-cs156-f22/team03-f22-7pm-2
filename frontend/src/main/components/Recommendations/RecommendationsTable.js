@@ -34,7 +34,7 @@ export default function RecommendationsTable({ recommendations, _currentUser }) 
         },
         {
             Header: 'Done?',
-            accessor: 'done',
+            id: 'done',
             accessor: (row, _rowIndex) => String(row.done)
         },
         {

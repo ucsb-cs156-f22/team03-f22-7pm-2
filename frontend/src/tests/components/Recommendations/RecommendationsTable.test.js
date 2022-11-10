@@ -4,6 +4,7 @@ import RecommendationsTable from "main/components/Recommendations/Recommendation
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
+import { recommendationsFixtures } from "fixtures/recommendationsFixtures";
 
 
 const mockedNavigate = jest.fn();
@@ -82,10 +83,11 @@ describe("RecommendationsTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    /*expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
+    expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("4");
 
-    const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    /*const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
