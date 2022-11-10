@@ -1,4 +1,4 @@
-import { _fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
@@ -120,25 +120,30 @@ describe("ReviewsIndexPage tests", () => {
 
         const restoreConsole = mockConsole();
 
-        const { queryByTestId } = render(
+        const { queryByTestId, getByText } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <ReviewsIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
-
         await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1); });
         restoreConsole();
+        const expectedHeaders = ["ID", "Item ID", "Reviewer Email", "Stars","Date Reviewed", "Comments"];
+
+        expectedHeaders.forEach((headerText) => {
+        const header = getByText(headerText);
+        expect(header).toBeInTheDocument();
+        });
 
         expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
     });
 
-   /* test("test what happens when you click delete, admin", async () => {
+    test("test what happens when you click delete, admin", async () => {
         setupAdminUser();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/menuitemreview/all").reply(200, ucsbDatesFixtures.threeDates);
+        axiosMock.onGet("/api/menuitemreview/all").reply(200, reviewsFixtures.threeReviews);
         axiosMock.onDelete("/api/menuitemreview").reply(200, "Review with id 1 was deleted");
 
 
@@ -162,6 +167,6 @@ describe("ReviewsIndexPage tests", () => {
 
         await waitFor(() => { expect(mockToast).toBeCalledWith("Review with id 1 was deleted") });
 
-    });*/
+    });
 
 });
