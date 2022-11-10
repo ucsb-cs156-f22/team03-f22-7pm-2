@@ -188,7 +188,6 @@ describe("AppNavbar tests", () => {
         await waitFor( () => expect(getByTestId("appnavbar-ucsbdates-list")).toBeInTheDocument() );
 
     });
-
     
     test("renders the diningcommonsmenuitem menu correctly for a user", async () => {
 
@@ -204,14 +203,60 @@ describe("AppNavbar tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-
+        
         await waitFor(() => expect(getByTestId("appnavbar-dining-commons-menu-item-dropdown")).toBeInTheDocument());
         const dropdown = getByTestId("appnavbar-dining-commons-menu-item-dropdown");
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
         await waitFor( () => expect(getByTestId("appnavbar-dining-commons-menu-item-list")).toBeInTheDocument() );
+    });
+    
+    test("renders the article menu correctly for a user", async () => {
 
+        const currentUser = currentUserFixtures.userOnly;
+        
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        
+        await waitFor(() => expect(getByTestId("appnavbar-article-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-article-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId("appnavbar-article-list")).toBeInTheDocument() );
+    });
+
+    test("renders the helprequests menu correctly for an admin", async () => {
+
+        const currentUser = currentUserFixtures.adminUser;
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByTestId("appnavbar-help-requests-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-help-requests-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId(/appnavbar-help-requests-create/)).toBeInTheDocument() );
     });
 
     test("renders the ucsbdates menu correctly for an admin", async () => {
@@ -283,6 +328,56 @@ describe("AppNavbar tests", () => {
         expect(aElement).toBeInTheDocument();
         aElement?.click();
         await waitFor( () => expect(getByTestId(/appnavbar-dining-commons-list/)).toBeInTheDocument() );
+
+    });
+
+
+    test("renders the article menu correctly for an admin", async () => {
+
+        const currentUser = currentUserFixtures.adminUser;
+        
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+        
+        await waitFor(() => expect(getByTestId("appnavbar-article-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-article-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId(/appnavbar-article-create/)).toBeInTheDocument() );
+    });
+
+    test("renders the ucsb organizations menu correctly for a user", async () => {
+
+        const currentUser = currentUserFixtures.userOnly;
+
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByTestId("appnavbar-organization-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-organization-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId("appnavbar-organization-list")).toBeInTheDocument() );
 
     });
    
