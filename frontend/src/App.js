@@ -12,9 +12,14 @@ import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexP
 import DiningCommonsCreatePage from "main/pages/DiningCommons/DiningCommonsCreatePage";
 import DiningCommonsEditPage from "main/pages/DiningCommons/DiningCommonsEditPage";
 
+import UCSBOrganizationsIndexPage from "main/pages/UCSBOrganizations/UCSBOrganizationsIndexPage";
+
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
+
+import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
+
 
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
@@ -54,6 +59,13 @@ function App() {
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
+              <Route exact path="/reviews/list" element={<ReviewsIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
               <Route exact path="/diningCommons/list" element={<DiningCommonsIndexPage />} />
             </>
           )
@@ -70,6 +82,13 @@ function App() {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/helpRequests/list" element={<HelpRequestsIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/organization/list" element={<UCSBOrganizationsIndexPage />} />
             </>
           )
         }
