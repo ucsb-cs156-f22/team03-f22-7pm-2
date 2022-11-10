@@ -43,7 +43,7 @@ describe("HelpRequestsIndexPage tests", () => {
         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     };
-    test("renders without crashing for regular user", async () => {
+    test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
 
