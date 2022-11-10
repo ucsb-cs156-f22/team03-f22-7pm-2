@@ -41,6 +41,7 @@
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-react-hooks": "^4.2.1-rc.0-next-64223fed8-20220210",
+    "eslint-plugin-storybook": "^0.6.7",
     "jest-mock-console": "^1.1.0",
     "react-test-renderer": "^17.0.2"
   },
