@@ -89,11 +89,11 @@ describe("RecommendationsTable tests", () => {
 
     /*const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
-    expect(editButton).toHaveClass("btn-primary");
+    expect(editButton).toHaveClass("btn-primary");*/
 
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
-    expect(deleteButton).toHaveClass("btn-danger");*/
+    expect(deleteButton).toHaveClass("btn-danger");
 
   });
 
