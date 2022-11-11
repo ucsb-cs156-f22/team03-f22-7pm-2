@@ -388,7 +388,7 @@ describe("AppNavbar tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-        
+
         await waitFor(() => expect(getByTestId("appnavbar-article-dropdown")).toBeInTheDocument());
         const dropdown = getByTestId("appnavbar-article-dropdown");
         const aElement = dropdown.querySelector("a");
@@ -444,7 +444,7 @@ describe("AppNavbar tests", () => {
         await waitFor( () => expect(getByTestId("appnavbar-organization-list")).toBeInTheDocument() );
 
     });
-
+    
     test("renders the organization menu correctly for an admin", async () => {
 
         const currentUser = currentUserFixtures.adminUser;
@@ -470,5 +470,4 @@ describe("AppNavbar tests", () => {
     });
    
 });
-
 
