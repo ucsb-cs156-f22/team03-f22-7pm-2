@@ -46,9 +46,9 @@ public class MenuItemReviewController extends ApiController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public MenuItemReview getById(
-            @ApiParam("itemid") @RequestParam Long itemid) {
-        MenuItemReview reviews = menuItemReviewRepository.findById(itemid)
-                .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, itemid));
+            @ApiParam("id") @RequestParam Long id) {
+        MenuItemReview reviews = menuItemReviewRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
 
         return reviews;
     }
@@ -57,6 +57,7 @@ public class MenuItemReviewController extends ApiController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public MenuItemReview postMenuItemReview(
+        @ApiParam("itemid") @RequestParam Long itemid,
         @ApiParam("reviewerEmail") @RequestParam String reviewerEmail,
         @ApiParam("stars") @RequestParam int stars,
         @ApiParam("comments") @RequestParam String comments,
@@ -66,6 +67,7 @@ public class MenuItemReviewController extends ApiController {
 
         MenuItemReview review = new MenuItemReview();
 
+        review.setItemid(itemid);
         review.setReviewerEmail(reviewerEmail);
         review.setStars(stars);
         review.setDateReviewed(dateReviewed);
@@ -80,24 +82,25 @@ public class MenuItemReviewController extends ApiController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteMenuItemReviews(
-            @ApiParam("itemid") @RequestParam Long itemid) {
-        MenuItemReview review = menuItemReviewRepository.findById(itemid)
-                .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, itemid));
+            @ApiParam("id") @RequestParam Long id) {
+        MenuItemReview review = menuItemReviewRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
 
         menuItemReviewRepository.delete(review);
-        return genericMessage("MenuItemReview with id %s deleted".formatted(itemid));
+        return genericMessage("MenuItemReview with id %s deleted".formatted(id));
     }
 
     @ApiOperation(value = "Update a single menu item review")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public MenuItemReview updateMenuItemReview(
-            @ApiParam("itemid") @RequestParam Long itemid,
+            @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid MenuItemReview incoming) {
 
-        MenuItemReview review = menuItemReviewRepository.findById(itemid)
-                .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, itemid));
+        MenuItemReview review = menuItemReviewRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MenuItemReview.class, id));
 
+        review.setItemid(incoming.getItemid());
         review.setReviewerEmail(incoming.getReviewerEmail());
         review.setStars(incoming.getStars());
         review.setDateReviewed(incoming.getDateReviewed());
