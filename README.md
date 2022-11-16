@@ -1,6 +1,6 @@
 # team03-f22-7pm-2
 
-* Production <https://f22-7pm-2-team02.herokuapp.com>
+* Production <https://f22-7pm-2-team03.herokuapp.com>
 * QA https://f22-7pm-2-team03-qa.herokuapp.com/
 
  * Storybook (production): <https://ucsb-cs156-f22.github.io/team03-f22-7pm-2-docs>
